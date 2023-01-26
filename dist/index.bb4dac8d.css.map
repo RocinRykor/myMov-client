@@ -1,0 +1,1 @@
+{"mappings":"ACEA","sources":["index.bb4dac8d.css","src/index.scss"],"sourcesContent":[".my-mov {\n  color: #4682b4;\n}\n\n/*# sourceMappingURL=index.bb4dac8d.css.map */\n","$color: steelblue;\n\n.my-mov {\n\tcolor: $color;\n}\n"],"names":[],"version":3,"file":"index.bb4dac8d.css.map"}

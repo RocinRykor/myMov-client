@@ -1,15 +1,15 @@
 import { createRoot } from 'react-dom/client';
 
+import { MainView } from './components/main-view/main-view';
+
+import './index.scss';
+
 // Import statement to indicate that you need to bundle `./index.scss`
 import './index.scss';
 
 // Main component (will eventually use all the others)
 const MyMovApplication = () => {
-	return (
-		<div className='my-mov'>
-			<div>Good morning</div>
-		</div>
-	);
+	return <MainView />;
 };
 
 // Finds the root of your app

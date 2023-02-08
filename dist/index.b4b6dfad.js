@@ -27156,40 +27156,33 @@ var _movieView = require("../movie-view/movie-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies, setMovies] = (0, _react.useState)([
-        {
-            id: 1,
-            title: "300",
-            image: "https://www.themoviedb.org/t/p/original/9W49fy5G7v9Ed3CXtvMi41YqZtt.jpg",
-            director: "Zack Snyder"
-        },
-        {
-            id: 2,
-            title: "Iron Man",
-            image: "https://www.themoviedb.org/t/p/original/egEkFOCl87aHJLkIGXGxzNdpQV3.jpg",
-            director: "Jon Favreau"
-        },
-        {
-            id: 3,
-            title: "The Matrix",
-            image: "https://www.themoviedb.org/t/p/original/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
-            director: "Wachowski Sisters"
-        }
-    ]);
+    const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        fetch("https://mymov-project.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
+            const moviesFromApi = data.map((movie)=>{
+                return {
+                    title: movie.Title,
+                    image: movie.ImageURL,
+                    director: movie.Director.Name
+                };
+            });
+            setMovies(moviesFromApi);
+        });
+    }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 15,
+        lineNumber: 27,
         columnNumber: 9
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 19,
+        lineNumber: 31,
         columnNumber: 9
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27200,16 +27193,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 25,
+                lineNumber: 37,
                 columnNumber: 4
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 23,
+        lineNumber: 35,
         columnNumber: 2
     }, undefined);
 };
-_s(MainView, "HzrAfIZn/F2eAEk+0rCPWi8ZOZs=");
+_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27467,7 +27460,7 @@ const MovieView = ({ movie , onBackClick  })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: "Author: "
+                        children: "Director: "
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 12,

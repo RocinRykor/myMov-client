@@ -9,15 +9,17 @@ const [selectedMovie, setSelectedMovie] = useState(null);
 
 	useEffect(() => {
 		fetch("https://mymov-project.herokuapp.com/movies")
-		  .then((response) => response.json())
-		  .then((data) => {
-			const moviesFromApi = data.map((movie) => {
-			  return {
-				title: movie.Title,
-				image: movie.ImageURL,
-				director: movie.Director.Name
+			.then((response) => response.json())
+			.then((data) => {
+			  const moviesFromApi = data.map((movie) => { return {
+				  id: movie._id,
+				  title: movie.Title,
+				  description: movie.Description,
+				  image: movie.ImageURL,
+				  genre: movie.genre,
+				  director: movie.Director,
 			  };
-			});
+			  });
 
 			setMovies(moviesFromApi);
 		  });

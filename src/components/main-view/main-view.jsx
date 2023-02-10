@@ -1,15 +1,29 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { MovieCard } from "../movie-card/movie-card"
 import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-  	const [movies, setMovies] = useState([
-		{ id: 1, title: "300", image: "https://www.themoviedb.org/t/p/original/9W49fy5G7v9Ed3CXtvMi41YqZtt.jpg", director: "Zack Snyder"},
-		{ id: 2, title: "Iron Man", image: "https://www.themoviedb.org/t/p/original/egEkFOCl87aHJLkIGXGxzNdpQV3.jpg", director: "Jon Favreau"},
-		{ id: 3, title: "The Matrix", image: "https://www.themoviedb.org/t/p/original/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg", director: "Wachowski Sisters"},
-]);
+  	const [movies, setMovies] = useState([]);
 
 const [selectedMovie, setSelectedMovie] = useState(null);
+
+	useEffect(() => {
+		fetch("https://mymov-project.herokuapp.com/movies")
+			.then((response) => response.json())
+			.then((data) => {
+			  const moviesFromApi = data.map((movie) => { return {
+				  id: movie._id,
+				  title: movie.Title,
+				  description: movie.Description,
+				  image: movie.ImageURL,
+				  genre: movie.genre,
+				  director: movie.Director,
+			  };
+			  });
+
+			setMovies(moviesFromApi);
+		  });
+	  }, []);
 
 if (selectedMovie) {
 	return <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />;

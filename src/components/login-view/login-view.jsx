@@ -14,9 +14,6 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password
     };
 
-    const body = JSON.stringify(data)
-      console.log(body)
-
     fetch("https://mymov-project.herokuapp.com/login", {
       method: "POST",
       headers: {

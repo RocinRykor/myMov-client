@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {Button, Form} from "react-bootstrap";
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -31,47 +32,48 @@ const handleSubmit = (event) => {
     });
   };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <h3>Register a New Account</h3>
-            <label>
-                Username:
-                <input
+return (
+    <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formSignUpUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 minLength="3"/>
-            </label>
-            <br/>
-            <label>
-                Password:
-                <input
+        </Form.Group>
+
+        <Form.Group controlId="formSignUpPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required/>
-            </label>
-            <br/>
-            <label>
-                Email:
-                <input
+        </Form.Group>
+
+        <Form.Group controlId="formSignUpEmail">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required/>
-            </label>
-            <br/>
-            <label>
-                Birthday:
-                <input
+        </Form.Group>
+
+        <Form.Group controlId="formSignUpBirthday">
+            <Form.Label>Birthday:</Form.Label>
+            <Form.Control
                 type="date"
                 value={birthday}
                 onChange={(e) => setBirthday(e.target.value)}
                 required/>
-            </label>
-            <br/>
-            <button type={"submit"}>Register</button>
-        </form>
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+            Sign Up
+        </Button>
+    </Form>
     );
 };

@@ -33,6 +33,7 @@ const handleSubmit = (event) => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <h3>Register a New Account</h3>
             <label>
                 Username:
                 <input
@@ -42,6 +43,7 @@ const handleSubmit = (event) => {
                 required
                 minLength="3"/>
             </label>
+            <br/>
             <label>
                 Password:
                 <input
@@ -50,6 +52,7 @@ const handleSubmit = (event) => {
                 onChange={(e) => setPassword(e.target.value)}
                 required/>
             </label>
+            <br/>
             <label>
                 Email:
                 <input
@@ -58,6 +61,7 @@ const handleSubmit = (event) => {
                 onChange={(e) => setEmail(e.target.value)}
                 required/>
             </label>
+            <br/>
             <label>
                 Birthday:
                 <input
@@ -66,7 +70,8 @@ const handleSubmit = (event) => {
                 onChange={(e) => setBirthday(e.target.value)}
                 required/>
             </label>
-            <button type={"submit"}>Submit</button>
+            <br/>
+            <button type={"submit"}>Register</button>
         </form>
     );
 };

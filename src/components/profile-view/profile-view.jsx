@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
-import {Container, Row, Col, Card} from "react-bootstrap";
+import {FavoriteMoviesView} from "../favorite-movies-view/favorite-movies-view";
+import {Container, Row, Col, Card, Button} from "react-bootstrap";
 
 export const ProfileView = ({user, movies}) => {
 
@@ -27,7 +28,7 @@ export const ProfileView = ({user, movies}) => {
             headers: {Authorization: `Bearer ${token}`},
         }).then(response => response.json())
             .then((response) => {
-                console.log("getUser response", response)
+                // console.log("getUser response", response)
                 setUsername(response.Username);
                 setEmail(response.Email);
                 setPassword(response.Password);
@@ -35,7 +36,11 @@ export const ProfileView = ({user, movies}) => {
                 setFavoriteMovies(response.FavoriteMovies)
             })
     }
-    console.log("userFavMov", favoriteMovies)
+
+    // Format the birthday value to a more readable format
+    const options = {year: 'numeric', month: 'long', day: 'numeric'};
+    const dateBirthday = new Date(birthday);
+    const formattedBirthday = dateBirthday.toLocaleDateString("en-US", options);
 
     useEffect(() => {
         getUser(token);
@@ -44,18 +49,31 @@ export const ProfileView = ({user, movies}) => {
     return (
         <Container>
             <Row className="mb-4">
-                <Col>
-                    <Card>
-                        <Card.Body>
-                            <div>
-                                <h4>User Details</h4>
-                                <p>Username: {username}</p>
-                                <p>Birthday: {birthday}</p>
-                                <p>Email: {email}</p>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                </Col>
+                <Card>
+                    <Card.Body>
+                        <div>
+                            <h4>User Details</h4>
+                            <p>Username: {username}</p>
+                            <p>Birthday: {formattedBirthday}</p>
+                            <p>Email: {email}</p>
+                        </div>
+                    </Card.Body>
+                </Card>
+            </Row>
+            <Row>
+                <FavoriteMoviesView movies={movies} favMovies={favoriteMovies}/>
+            </Row>
+            <Row>
+                <Card>
+                    <Card.Body>
+                        <div>
+                            <h4>Update User Information:</h4>
+                            <Row>
+                                <Button className="btn-danger">DELETE USER!</Button>
+                            </Row>
+                        </div>
+                    </Card.Body>
+                </Card>
             </Row>
         </Container>
     )

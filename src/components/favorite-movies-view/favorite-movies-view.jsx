@@ -1,28 +1,34 @@
 import React, from 'react';
 import {Row, Col} from 'react-bootstrap';
+import {MovieCard} from "../movie-card/movie-card";
 
-export const FavoriteMoviesView = ({ movies, favMovies }) => {
+export const FavoriteMoviesView = ({favMovies}) => {
 
-  console.log("All Movies: ", movies)
-  console.log("Fav Movies: ", favMovies)
+    const favoriteMovies = favMovies.map((movie) => {
+        return {
+            id: movie._id,
+            title: movie.Title,
+            image: movie.ImageURL,
+            description: movie.Description,
+            genre: movie.Genre,
+            director: movie.Director,
+        }
+    });
 
-  let favoriteMovies = movies.filter(m => favMovies.includes(m._id))
-  console.log("Filtered Favorite Movies: ", favoriteMovies)
-
-  return (
-    <Row>
-      {favMovies.length === 0 ? (
-        <Col>The list of favorite movies is empty</Col>
-      ) : (
-        <>
-          <div className='text-start h2 mb-4'>List of favorite movies</div>
-          {favMovies.map((movie) => (
-            <Col>
-              {movie.title}
-            </Col>
-          ))}
-        </>
-      )}
-    </Row>
-  );
+    return (
+        <Row>
+            {favoriteMovies.length === 0 ? (
+                <Col>The list of favorite movies is empty</Col>
+            ) : (
+                <>
+                    <div className='text-start h2 mb-4'>List of favorite movies</div>
+                    {favoriteMovies.map((movie) => (
+                        <Col className="mb-4" key={movie.id} md={3}>
+                            <MovieCard movie={movie}/>
+                        </Col>
+                    ))}
+                </>
+            )}
+        </Row>
+    );
 };

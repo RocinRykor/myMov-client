@@ -92,7 +92,7 @@ export const MainView = () => {
                                     <Col> The List is Empty!</Col>
                                 ) : (
                                     <Col md={8}>
-                                        <MovieView movies={movies}/>
+                                        <MovieView movies={movies} user={user}/>
                                     </Col>
                                 )}
                             </>
@@ -106,7 +106,7 @@ export const MainView = () => {
                                     <Navigate to="/login" replace/>
                                 ) : (
                                     <Col>
-                                        <ProfileView user={user} movies={movies}/>
+                                        <ProfileView user={user}/>
                                     </Col>
                                 )}
                             </>

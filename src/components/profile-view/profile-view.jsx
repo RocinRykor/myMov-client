@@ -3,13 +3,9 @@ import {FavoriteMoviesView} from "../favorite-movies-view/favorite-movies-view";
 import {UpdateView} from "../update-view/update-view";
 import {Container, Row, Col, Card, Button} from "react-bootstrap";
 
-export const ProfileView = ({user, movies}) => {
+export const ProfileView = ({user}) => {
 
     const storedToken = localStorage.getItem("token");
-    const storedMovies = JSON.parse(localStorage.getItem("movies"))
-    const storedUser = localStorage.getItem("user");
-
-
     const [token] = useState(storedToken ? storedToken : null);
 
     const [username, setUsername] = useState('');
@@ -17,10 +13,6 @@ export const ProfileView = ({user, movies}) => {
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState("");
     const [favoriteMovies, setFavoriteMovies] = useState([]);
-
-    const [allMovies] = useState(storedMovies ? storedMovies : movies);
-    const [filteredMovies, setFilteredMovies] = useState([]);
-
 
 // Show updated user on the profile
     const getUser = (token) => {

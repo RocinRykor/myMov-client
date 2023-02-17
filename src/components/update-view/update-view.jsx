@@ -1,6 +1,6 @@
 
-import { useState, useEffect } from "react";
-import {Button, Container, Form, Row, Col, Card, CardGroup} from "react-bootstrap";
+import { useState } from "react";
+import {Button, Form, Row, Col, Card, CardGroup} from "react-bootstrap";
 
 export const UpdateView = ({ user }) => {
 
@@ -41,26 +41,6 @@ export const UpdateView = ({ user }) => {
         } else {
           alert("Something went wrong");
         }
-      };
-
-
-      const handleDeregister = () => {
-
-        fetch(`https://movie-api-8cvs.onrender.com/users/${user.Username}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        }).then((response) => {
-          if (response.ok) {
-            alert("Account successfully deleted");
-            localStorage.clear();
-            window.location.reload();
-          } else {
-            alert("Something went wrong");
-          }
-        });
       };
 
   return (

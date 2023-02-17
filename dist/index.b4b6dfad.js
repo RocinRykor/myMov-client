@@ -27578,7 +27578,7 @@ const MovieCard = ({ movie  })=>{
 _c = MovieCard;
 MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
-        _id: (0, _propTypesDefault.default).string,
+        _id: (0, _propTypesDefault.default).string.isRequired,
         Title: (0, _propTypesDefault.default).string,
         Description: (0, _propTypesDefault.default).string,
         ImageURL: (0, _propTypesDefault.default).string,
@@ -47007,45 +47007,40 @@ const FavoriteMoviesView = ({ favMovies  })=>{
             director: movie.Director
         };
     });
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
-        children: favoriteMovies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-            children: "The list of favorite movies is empty"
-        }, void 0, false, {
-            fileName: "src/components/favorite-movies-view/favorite-movies-view.jsx",
-            lineNumber: 21,
-            columnNumber: 17
-        }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    className: "text-start h2 mb-4",
-                    children: "List of favorite movies"
-                }, void 0, false, {
-                    fileName: "src/components/favorite-movies-view/favorite-movies-view.jsx",
-                    lineNumber: 24,
-                    columnNumber: 21
-                }, undefined),
-                favoriteMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
-                        className: "mb-4",
-                        md: 3,
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                            movie: movie
-                        }, void 0, false, {
-                            fileName: "src/components/favorite-movies-view/favorite-movies-view.jsx",
-                            lineNumber: 27,
-                            columnNumber: 29
-                        }, undefined)
-                    }, movie.id, false, {
-                        fileName: "src/components/favorite-movies-view/favorite-movies-view.jsx",
-                        lineNumber: 26,
-                        columnNumber: 25
-                    }, undefined))
-            ]
-        }, void 0, true)
+    if (favoriteMovies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+        children: "The list of favorite movies is empty"
     }, void 0, false, {
         fileName: "src/components/favorite-movies-view/favorite-movies-view.jsx",
         lineNumber: 19,
-        columnNumber: 9
+        columnNumber: 16
     }, undefined);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "text-start h2 mb-4",
+                children: "List of favorite movies"
+            }, void 0, false, {
+                fileName: "src/components/favorite-movies-view/favorite-movies-view.jsx",
+                lineNumber: 24,
+                columnNumber: 13
+            }, undefined),
+            favoriteMovies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
+                    className: "mb-4",
+                    md: 3,
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                        movie: movie
+                    }, void 0, false, {
+                        fileName: "src/components/favorite-movies-view/favorite-movies-view.jsx",
+                        lineNumber: 27,
+                        columnNumber: 21
+                    }, undefined)
+                }, movie.id, false, {
+                    fileName: "src/components/favorite-movies-view/favorite-movies-view.jsx",
+                    lineNumber: 26,
+                    columnNumber: 17
+                }, undefined))
+        ]
+    }, void 0, true);
 };
 _c = FavoriteMoviesView;
 var _c;

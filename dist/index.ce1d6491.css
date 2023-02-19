@@ -2,6 +2,15 @@
   color: #4682b4;
 }
 
+img {
+  width: 100%;
+}
+
+.movie-poster {
+  width: 125px;
+  height: 350px;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

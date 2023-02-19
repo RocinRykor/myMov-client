@@ -2,7 +2,7 @@ import React, from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {MovieCard} from "../movie-card/movie-card";
 
-export const FavoriteMoviesView = ({favMovies}) => {
+export const FavoriteMoviesView = ({favMovies, user}) => {
 
     const favoriteMovies = favMovies.map((movie) => {
         return {
@@ -24,7 +24,7 @@ export const FavoriteMoviesView = ({favMovies}) => {
             <div className='text-start h2 mb-4'>List of favorite movies</div>
             {favoriteMovies.map((movie) => (
                 <Col className="mb-4" key={movie.id} md={3}>
-                    <MovieCard movie={movie}/>
+                    <MovieCard movie={movie} user={user}/>
                 </Col>
             ))}
         </>

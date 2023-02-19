@@ -69,23 +69,23 @@ export const MovieCard = ({movie, user}) => {
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Text className={"text-muted"}>By: {movie.director.Name}</Card.Text>
                 <Card.Text className={"mt-3"}>{movie.description}</Card.Text>
-                <Card.Footer className={"d-flex flex-row justify-content-between align-items-baseline mt-auto"}>
-                    <Link to={`/movies/${encodeURIComponent(movie.id)}`}
-                          className={"text-start"}>
-                        <Button className="btn-secondary">Details</Button>
-                    </Link>
-                    {isFavorite ? (
-                        <Button variant={"btn-secondary"}>
-                            <AiFillHeart onClick={() => removeFromFavorites(movie.id)} color={"red"}
-                                         fontSize="2em"/>
-                        </Button>
-                    ) : (
-                        <Button variant={"btn-secondary"}>
-                            <AiOutlineHeart onClick={() => addToFavorites(movie.id)} color={"gray"} fontSize="2em"/>
-                        </Button>
-                    )}
-                </Card.Footer>
             </Card.Body>
+            <Card.Footer className={"d-flex flex-row justify-content-between align-items-baseline mt-auto"}>
+                <Link to={`/movies/${encodeURIComponent(movie.id)}`}
+                      className={"text-start"}>
+                    <Button className="btn-secondary">Details</Button>
+                </Link>
+                {isFavorite ? (
+                    <Button variant={"btn-secondary"}>
+                        <AiFillHeart onClick={() => removeFromFavorites(movie.id)} color={"red"}
+                                     fontSize="2em"/>
+                    </Button>
+                ) : (
+                    <Button variant={"btn-secondary"}>
+                        <AiOutlineHeart onClick={() => addToFavorites(movie.id)} color={"gray"} fontSize="2em"/>
+                    </Button>
+                )}
+            </Card.Footer>
         </Card>
     );
 };

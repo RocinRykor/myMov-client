@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {Button, Card, Col, Image, Row} from "react-bootstrap";
 import {AiFillHeart, AiOutlineHeart} from "react-icons/all";
+import {MovieCard} from "../movie-card/movie-card";
 
 export const MovieView = ({movies, user}) => {
     const storedToken = localStorage.getItem("token");
@@ -65,6 +66,8 @@ export const MovieView = ({movies, user}) => {
     const movie = movies.find((m) => m.id === moviesID);
     const isFavorite = favoriteMovies.find((f) => f._id === moviesID);
 
+    const similarMovies = movies.filter((m) => m.genre.Name === movie.genre.Name && m !== movie);
+
     return (
         <>
             <Row>
@@ -107,6 +110,16 @@ export const MovieView = ({movies, user}) => {
                         </Card.Footer>
                     </Card>
                 </Col>
+            </Row>
+            <Row>
+                <Row>
+                    <h2 className={"mt-3"}>Similar Movies: </h2>
+                    {similarMovies.map((movie) => (
+                        <Col className="mb-4" key={movie.id} md={4}>
+                            <MovieCard movie={movie} user={user}/>
+                        </Col>
+                    ))}
+                </Row>
             </Row>
         </>
     );

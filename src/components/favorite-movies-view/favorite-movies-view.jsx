@@ -1,5 +1,5 @@
 import React, from 'react';
-import {Row, Col} from 'react-bootstrap';
+import {Row, Col, Card} from 'react-bootstrap';
 import {MovieCard} from "../movie-card/movie-card";
 
 export const FavoriteMoviesView = ({favMovies, user}) => {
@@ -20,13 +20,17 @@ export const FavoriteMoviesView = ({favMovies, user}) => {
     }
 
     return (
-        <>
-            <div className='text-start h2 mb-4'>List of favorite movies</div>
-            {favoriteMovies.map((movie) => (
-                <Col className="mb-4" key={movie.id} md={3}>
-                    <MovieCard movie={movie} user={user}/>
-                </Col>
-            ))}
-        </>
+        <Card border="light" className="bg-light bg-opacity-75 mt-3">
+            <Card.Title className="fw-bold fs-2">Favorite Movies:</Card.Title>
+            <Card.Body>
+                <Row>
+                {favoriteMovies.map((movie) => (
+                    <Col className="mb-4" key={movie.id} md={3}>
+                        <MovieCard movie={movie} user={user}/>
+                    </Col>
+                ))}
+            </Row>
+            </Card.Body>
+        </Card>
     )
 };

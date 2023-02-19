@@ -4,7 +4,6 @@ import {Button, Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {AiOutlineHeart, AiFillHeart} from "react-icons/all";
 
-import "./movie-card.scss";
 
 export const MovieCard = ({movie, user}) => {
     const storedToken = localStorage.getItem("token");

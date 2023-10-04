@@ -8,7 +8,7 @@ export const DeleteView = ({ token, user }) => {
 
     userWarning === false
       ? alert("Thank you for continuing to use myMov")
-      : fetch(`https://mymov-project.herokuapp.com/users/${user.Username}`, {
+      : fetch(`http://10.0.12.222/users/${user.Username}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,

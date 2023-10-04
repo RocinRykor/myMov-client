@@ -23,7 +23,7 @@ export const UpdateView = ({ user }) => {
 
     console.log(data);
     const updateUser = await fetch(
-      `https://mymov-project.herokuapp.com/users/${user.Username}`,
+      `http://10.0.12.222/users/${user.Username}`,
       {
         method: "PUT",
         body: JSON.stringify(data),

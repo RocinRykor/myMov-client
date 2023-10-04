@@ -1,9 +1,8 @@
-import React, from 'react';
-import {Row, Col, Card} from 'react-bootstrap';
-import {MovieCard} from '../movie-card/movie-card';
+import React from "react";
+import { Card, Col, Row } from "react-bootstrap";
+import { MovieCard } from "../movie-card/movie-card";
 
-export const FavoriteMoviesView = ({favMovies, user}) => {
-
+export const FavoriteMoviesView = ({ favMovies, user }) => {
   const favoriteMovies = favMovies.map((movie) => {
     return {
       id: movie._id,
@@ -20,17 +19,17 @@ export const FavoriteMoviesView = ({favMovies, user}) => {
   }
 
   return (
-      <Card border="light" className="bg-light bg-opacity-75 mt-3">
-        <Card.Title className="fw-bold fs-2">Favorite Movies:</Card.Title>
-        <Card.Body>
-          <Row>
-            {favoriteMovies.map((movie) => (
-                <Col className="mb-4" key={movie.id} md={3}>
-                  <MovieCard movie={movie} user={user}/>
-                </Col>
-            ))}
-          </Row>
-        </Card.Body>
-      </Card>
+    <Card border="light" className="bg-light bg-opacity-75 mt-3">
+      <Card.Title className="fw-bold fs-2">Favorite Movies:</Card.Title>
+      <Card.Body>
+        <Row>
+          {favoriteMovies.map((movie) => (
+            <Col className="mb-4" key={movie.id} md={3}>
+              <MovieCard movie={movie} user={user} />
+            </Col>
+          ))}
+        </Row>
+      </Card.Body>
+    </Card>
   );
 };

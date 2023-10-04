@@ -15,7 +15,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password,
     };
 
-    fetch("https://mymov-project.herokuapp.com/login", {
+    fetch("http://10.0.12.222/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,6 +41,7 @@ export const LoginView = ({ onLoggedIn }) => {
   // Login form
   return (
     <Form onSubmit={handleSubmit}>
+      <h1>Hello World!</h1>
       <Form.Group controlId="formUsername" className="mt-3">
         <Form.Label>Username:</Form.Label>
         <Form.Control

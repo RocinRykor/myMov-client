@@ -10,7 +10,7 @@ export const ProfileView = ({ user }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   const getUser = (token) => {
-    fetch(`https://mymov-project.herokuapp.com/users/${user.Username}`, {
+    fetch(`http://44.203.58.84/users/${user.Username}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     })

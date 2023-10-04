@@ -11,7 +11,7 @@ export const MovieCard = ({ movie, user }) => {
   // Grab user information for their list of favorite movies
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const getUser = (token) => {
-    fetch(`https://mymov-project.herokuapp.com/users/${user.Username}`, {
+    fetch(`http://10.0.12.222/users/${user.Username}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -26,16 +26,13 @@ export const MovieCard = ({ movie, user }) => {
   }, []);
 
   const addToFavorites = (movieID) => {
-    fetch(
-      `https://mymov-project.herokuapp.com/users/${user.Username}/movies/${movieID}`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((response) => {
+    fetch(`http://10.0.12.222/users/${user.Username}/movies/${movieID}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
       if (response.ok) {
         window.location.reload();
       } else {
@@ -45,16 +42,13 @@ export const MovieCard = ({ movie, user }) => {
   };
 
   const removeFromFavorites = (movieID) => {
-    fetch(
-      `https://mymov-project.herokuapp.com/users/${user.Username}/movies/${movieID}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((response) => {
+    fetch(`http://10.0.12.222/users/${user.Username}/movies/${movieID}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
       if (response.ok) {
         window.location.reload();
       } else {

@@ -10,12 +10,14 @@ export const LoginView = ({ onLoggedIn }) => {
     // prevents the default behavior of the form which is to reload the entire page
     event.preventDefault();
 
+    console.log("Submit Event!");
+
     const data = {
       Username: username,
       Password: password,
     };
 
-    fetch("http://10.0.12.222/login", {
+    fetch("http://MyFlix-ALB-1894489294.us-east-1.elb.amazonaws.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

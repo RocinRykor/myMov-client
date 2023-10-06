@@ -23,7 +23,7 @@ export const UpdateView = ({ user }) => {
 
     console.log(data);
     const updateUser = await fetch(
-      `http://10.0.12.222/users/${user.Username}`,
+      `http://MyFlix-ALB-1894489294.us-east-1.elb.amazonaws.com/users/${user.Username}`,
       {
         method: "PUT",
         body: JSON.stringify(data),

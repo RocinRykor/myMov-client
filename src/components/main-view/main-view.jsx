@@ -21,7 +21,7 @@ export const MainView = () => {
     if (!token) {
       return;
     }
-    fetch("http://10.0.12.222/movies", {
+    fetch("http://MyFlix-ALB-1894489294.us-east-1.elb.amazonaws.com/movies", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())

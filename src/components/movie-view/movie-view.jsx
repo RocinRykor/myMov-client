@@ -2,7 +2,9 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Image, Row } from "react-bootstrap";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/all";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import UserUploadedImages from "../user-uploaded-images-view/user-uploaded-images";
+import ImageUploadForm from "../image-upload-form/image-upload-form";
 import { MovieCard } from "../movie-card/movie-card";
 
 export const MovieView = ({ movies, user }) => {
@@ -14,11 +16,15 @@ export const MovieView = ({ movies, user }) => {
 
   // Grab user information for their list of favorite movies
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [userImages, setUserImages] = useState([]);
   const getUser = (token) => {
-    fetch(`http://10.0.12.222/users/${user.Username}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      `http://myflix-alb-522491147.us-east-1.elb.amazonaws.com/users/${user.Username}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((response) => response.json())
       .then((response) => {
         console.log("Response: ", response);
@@ -26,18 +32,66 @@ export const MovieView = ({ movies, user }) => {
       });
   };
 
+  // Sample list of common image file extensions
+  const imageExtensions = [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".svg",
+    ".webp",
+  ];
+
+  // Function to filter out non-image objects
+  function filterNonImages(userImages) {
+    if (!userImages) {
+      return []; // Return an empty array if userImages is undefined or null
+    }
+
+    return userImages.filter((object) => {
+      const key = object.Key.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+      // Check if the object's key ends with any of the image extensions
+      return imageExtensions.some((extension) => key.includes(extension));
+    });
+  }
+
+  const getImages = (movieID) => {
+    fetch(
+      `http://myflix-alb-522491147.us-east-1.elb.amazonaws.com/images/${movieID}/`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        console.log("Response: ", response);
+        setUserImages(filterNonImages(response.Contents));
+
+        console.log(userImages);
+      });
+  };
+
   useEffect(() => {
     getUser(token);
+    getImages(moviesID);
   }, []);
 
   const addToFavorites = (movieID) => {
-    fetch(`http://10.0.12.222/users/${user.Username}/movies/${movieID}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
+    fetch(
+      `http://myflix-alb-522491147.us-east-1.elb.amazonaws.com/users/${user.Username}/movies/${movieID}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => {
       if (response.ok) {
         window.location.reload();
       } else {
@@ -47,13 +101,16 @@ export const MovieView = ({ movies, user }) => {
   };
 
   const removeFromFavorites = (movieID) => {
-    fetch(`http://10.0.12.222/users/${user.Username}/movies/${movieID}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
+    fetch(
+      `http://myflix-alb-522491147.us-east-1.elb.amazonaws.com/users/${user.Username}/movies/${movieID}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => {
       if (response.ok) {
         window.location.reload();
       } else {
@@ -124,6 +181,11 @@ export const MovieView = ({ movies, user }) => {
           </Card>
         </Col>
       </Row>
+      <Row>
+        <UserUploadedImages userImages={userImages}></UserUploadedImages>
+        <ImageUploadForm movieId={moviesID} token={token}></ImageUploadForm>
+      </Row>
+
       <Row>
         <Row>
           <h2 className={"mt-3"}>Similar Movies: </h2>

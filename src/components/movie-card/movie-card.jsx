@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/all";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 export const MovieCard = ({ movie, user }) => {
   const storedToken = localStorage.getItem("token");
@@ -11,10 +11,13 @@ export const MovieCard = ({ movie, user }) => {
   // Grab user information for their list of favorite movies
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const getUser = (token) => {
-    fetch(`http://10.0.12.222/users/${user.Username}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      `http://MyFlix-ALB-1894489294.us-east-1.elb.amazonaws.com/users/${user.Username}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((response) => response.json())
       .then((response) => {
         setFavoriteMovies(response.FavoriteMovies);
@@ -26,13 +29,16 @@ export const MovieCard = ({ movie, user }) => {
   }, []);
 
   const addToFavorites = (movieID) => {
-    fetch(`http://10.0.12.222/users/${user.Username}/movies/${movieID}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
+    fetch(
+      `http://MyFlix-ALB-1894489294.us-east-1.elb.amazonaws.com/users/${user.Username}/movies/${movieID}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => {
       if (response.ok) {
         window.location.reload();
       } else {
@@ -42,13 +48,16 @@ export const MovieCard = ({ movie, user }) => {
   };
 
   const removeFromFavorites = (movieID) => {
-    fetch(`http://10.0.12.222/users/${user.Username}/movies/${movieID}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
+    fetch(
+      `http://MyFlix-ALB-1894489294.us-east-1.elb.amazonaws.com/users/${user.Username}/movies/${movieID}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => {
       if (response.ok) {
         window.location.reload();
       } else {

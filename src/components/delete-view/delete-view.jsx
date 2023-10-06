@@ -8,13 +8,16 @@ export const DeleteView = ({ token, user }) => {
 
     userWarning === false
       ? alert("Thank you for continuing to use myMov")
-      : fetch(`http://10.0.12.222/users/${user.Username}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }).then((response) => {
+      : fetch(
+          `http://MyFlix-ALB-1894489294.us-east-1.elb.amazonaws.com/users/${user.Username}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        ).then((response) => {
           if (response.ok) {
             alert("Account successfully deleted");
             localStorage.clear();
